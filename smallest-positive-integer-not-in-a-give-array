@@ -1,0 +1,36 @@
+
+function solution($A) {
+    $nominated=0;
+    sort($A);
+    $A = array_unique($A);
+    $A = array_values($A);
+    $i = 0;
+    foreach($A as $oneValue){
+        if ($oneValue<=0){
+            $i++;
+            continue;
+        }
+        break;
+    }
+
+    if (isset($A[$i]) && ($A[$i]>1))
+        return 1;
+    $indexOfPreNominated = -1;
+    while(isset($A[$i])){
+        $indexOfPreNominated = $i;
+        if (isset($A[$i+1])  && ($A[$i+1]-$A[$i]<=1)){
+            $i++;
+            $indexOfPreNominated = $i;
+        }else{
+            break;
+        }
+    }
+
+
+    if ($indexOfPreNominated == -1){
+        return 1;
+    }
+    else{
+        return ($A[$indexOfPreNominated] + 1);
+    }
+}
